@@ -42,4 +42,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(Cart::class, 'consumer_id');
     }
+    
+    
+    public function devices()
+    {
+        return $this->hasMany(Device::class);
+    }
 }
