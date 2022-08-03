@@ -20,13 +20,15 @@ trait AssetOperation
                     }
                 }
                 $class_basename = Str::snake(class_basename(get_class($data)));
-                $image = upload_image(request()->image, $class_basename);
-                $data->media()->create(['media' => 'images/' . $class_basename . '/' .$image,'media_type' => 'image']);
+                $image_name = time().'.'.request()->image->extension();  
+                $path = self::checkOrCreateDirectory(storage_path('app/public/images/'.$class_basename));
+                request()->image->move($path, $image_name);
+                $data->media()->create(['media' => 'images/' . $class_basename . '/' .$image_name,'media_type' => 'image']);
             }
         });
 
         static::deleted(function ($data) {
-            if ($data->relationLoaded('media') && $data->media()->exists()) {
+            if ($data->media()->exists()) {
                 $image = AppMedia::where(['app_mediaable_type' => get_class($data),'app_mediaable_id' => $data->id ,'media_type' => 'image'])->first();
                 if (file_exists(storage_path('app/public/'.$image->media))) {
                     \File::delete(storage_path('app/public/'.$image->media));
@@ -43,7 +45,15 @@ trait AssetOperation
 
     public function getImageAttribute()
     {
-        $image = $this->media()->exists() ? 'storage/'.$this->media?->media : setting('default_image');
+        $image = $this->media()->exists() ? 'storage/'.$this->media?->media : 'global/images/default_image.jpeg'; //setting('default_image')
         return asset($image);
+    }
+
+    private static function checkOrCreateDirectory($path)
+    {
+        if (!\File::isDirectory($path)) {
+            \File::makeDirectory($path, 0755, true);
+        }
+        return $path;
     }
 }

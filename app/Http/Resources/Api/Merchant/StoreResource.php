@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Resources\Api;
+namespace App\Http\Resources\Api\Merchant;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserResource extends JsonResource
+class StoreResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,10 +17,10 @@ class UserResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
-            'phone' => $this->phone,
+            'is_vat_included' => (bool)$this->is_vat_included,
             'image' => $this->image,
-            'user_type' => $this->user_type,
-            'token' => $this->when($this->token, $this->token),
+            'shipping_cost' => (float)$this->shipping_cost,
+            'products_count' => $this->products_count,
         ];
     }
 }

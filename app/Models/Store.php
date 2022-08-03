@@ -13,6 +13,7 @@ class Store extends Model
     use Filter, AssetOperation,Translatable;
 
     protected $guarded = ['id','created_at','updated_at'];
+    protected $attributes = ['is_vat_included' => false];
     public $translatedAttributes = ['name', 'description'];
 
     public function scopeActive($query)
