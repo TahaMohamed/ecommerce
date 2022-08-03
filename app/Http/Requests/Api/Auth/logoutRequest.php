@@ -2,29 +2,20 @@
 
 namespace App\Http\Requests\Api\Auth;
 
-use Illuminate\Foundation\Http\FormRequest;
+use App\Http\Requests\Api\ApiMasterRequest;
 
-class logoutRequest extends FormRequest
+class LogoutRequest extends ApiMasterRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize()
-    {
-        return false;
-    }
-
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, mixed>
+     * @return array
      */
     public function rules()
     {
         return [
-            //
+            'device_token' => 'nullable|exists:devices,device_token,device_type,'. $this->device_type,
+            'device_type' => 'nullable|exists:devices,device_type,device_token,'. $this->device_token,
         ];
     }
 }

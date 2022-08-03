@@ -12,6 +12,8 @@ class Device extends Model
     public const DEVICE_TYPES = [
         self::IOS,self::ANDROID, self::HUAWEI
     ];
+    protected $guarded = ['id','created_at','updated_at'];
+
 
     public function user()
     {

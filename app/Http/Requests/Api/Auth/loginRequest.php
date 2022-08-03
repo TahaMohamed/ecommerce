@@ -2,7 +2,8 @@
 
 namespace App\Http\Requests\Api\Auth;
 
-use App\Http\Requests\ApiMasterRequest;
+use App\Http\Requests\Api\ApiMasterRequest;
+use App\Models\Device;
 
 class LoginRequest extends ApiMasterRequest
 {
@@ -16,15 +17,15 @@ class LoginRequest extends ApiMasterRequest
         return [
           'username' => 'required',
           'password' => 'required',
-          'device_token' => 'required|string|between:2,10000',
-          'type' => 'required|in:ios,android',
+          'device_token' => 'nullable|string|between:2,1000',
+          'device_type' => 'nullable|in:'. join(',',Device::DEVICE_TYPES),
         ];
     }
 
     protected function prepareForValidation()
     {
         $this->merge([
-            'username' => is_numeric($this->username) ? filter_mobile_number($this->username) : $this->username
+            'username' => is_numeric($this->username) ? convert_arabic_number($this->username) : $this->username
         ]);
     }
 }
