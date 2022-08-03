@@ -15,7 +15,7 @@ class StoreRequest extends ApiMasterRequest
     {
         $rules = [
           'is_vat_included' => 'required|boolean',
-          'vat_percent' => 'required|numeric|lt:40',
+          'vat_percent' => 'nullable|required_if:is_vat_included,true|numeric|lt:40',
           'shipping_cost' => 'nullable|numeric|gte:0',
           'image' => 'nullable|mimes:png,jpeg,jpg',
         ];

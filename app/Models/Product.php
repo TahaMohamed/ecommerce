@@ -15,6 +15,22 @@ class Product extends Model
     protected $guarded = ['id','created_at','updated_at'];
     public $translatedAttributes = ['name', 'description'];
 
+    // Accessories
+    public function getIsVatIncludedAttribute()
+    {
+        return (bool) $this->store?->is_vat_included;
+    }
+    
+    public function getVatPercentAttribute()
+    {
+        return (float) $this->store?->vat_percent;
+    }
+
+    public function getVatAmountAttribute()
+    {
+        return (float) $this->vat_percent * $this->price;
+    }
+
     public function scopeActive($query)
     {
         $query->where('is_active', true);

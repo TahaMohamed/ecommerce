@@ -25,7 +25,7 @@ class RegisterRequest extends ApiMasterRequest
         if($this->user_type == 'merchant'){
             $rules['store'] = 'required|array|size:' . count($locales);
             foreach ($locales as $locale) {
-                $rules['store.' .$locale. '.name'] = 'required|string|max:100|unique:store_translations,name';
+                $rules['store.' .$locale. '.name'] = 'required|string|max:10|unique:store_translations,name';
             }
         }
 

@@ -13,5 +13,7 @@ Route::middleware('auth:sanctum')->group(function () {
         // Merchant Store
         Route::get('stores', "StoreController@index");
         Route::put('stores', "StoreController@update");
+        // Store Product
+        Route::apiResource('products','ProductController');
     });
 });

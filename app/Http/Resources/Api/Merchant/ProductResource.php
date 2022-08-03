@@ -4,7 +4,7 @@ namespace App\Http\Resources\Api\Merchant;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class StoreResource extends JsonResource
+class ProductResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,14 +15,14 @@ class StoreResource extends JsonResource
     public function toArray($request)
     {
         return [
-            // 'id' => $this->id,
+            'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'is_vat_included' => (bool)$this->is_vat_included,
-            'vat_percent' => (float)$this->vat_percent,
             'image' => $this->image,
-            'shipping_cost' => (float)$this->shipping_cost,
-            'products_count' => $this->products_count,
+            'price' => (float)$this->price,
+            'is_vat_included' => $this->is_vat_included,
+            'vat_percent' => $this->vat_percent,
+            'vat_amount' => $this->vat_amount,
         ];
     }
 }

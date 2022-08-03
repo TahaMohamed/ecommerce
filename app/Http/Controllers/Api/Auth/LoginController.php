@@ -24,7 +24,7 @@ class LoginController extends Controller
             $user->devices()->firstOrCreate($request->only(['device_token','device_type']));
         }
         $user->token = $user->createToken('RaseedJakDashboard')->plainTextToken;
-        return UserResource::make($user)->additional([
+        return UserResource::make($user->load('store'))->additional([
             'status' => true,
             'message' => __('auth.success_login', ['user' => $user->name])
         ]);
