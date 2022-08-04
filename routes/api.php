@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\{ConsumerMiddleware, MerchantMiddleware};
 use Illuminate\Support\Facades\Route;
 
 Route::namespace('Auth')->group(function () {
@@ -9,7 +10,7 @@ Route::namespace('Auth')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::namespace('Merchant')->prefix('merchant')->group(function () {
+    Route::namespace('Merchant')->middleware(MerchantMiddleware::class)->prefix('merchant')->group(function () {
         // Merchant Store
         Route::get('stores', "StoreController@index");
         Route::put('stores', "StoreController@update");
@@ -17,7 +18,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('products','ProductController');
     });
     
-    Route::namespace('Consumer')->prefix('consumer')->group(function () {
+    Route::namespace('Consumer')->middleware(ConsumerMiddleware::class)->prefix('consumer')->group(function () {
         // Consumer Store
         Route::apiResource('stores', "StoreController")->only('index','show');
         // Store Product

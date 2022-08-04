@@ -27,6 +27,10 @@ class User extends Authenticatable
         }
     }
 
+    public function getHasRightsToAccessAttribute()
+    {
+        return $this->is_active && ! $this->is_ban;
+    }
     // Scopes
     public function scopeActive($query)
     {
