@@ -23,7 +23,7 @@ class Product extends Model
     
     public function getVatPercentAttribute()
     {
-        return (float) $this->store?->vat_percent;
+        return $this->store?->vat_percent/100;
     }
 
     public function getVatAmountAttribute()

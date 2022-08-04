@@ -4,7 +4,6 @@ namespace App\Http\Requests\Api\Merchant;
 
 use App\Http\Requests\Api\ApiMasterRequest;
 use App\Models\Product;
-use Illuminate\Validation\Rule;
 
 class ProductRequest extends ApiMasterRequest
 {

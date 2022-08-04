@@ -22,5 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('stores', "StoreController")->only('index','show');
         // Store Product
         Route::apiResource('store.products','ProductController')->only('index','show')->shallow();
+        // Cart
+        Route::apiResource('carts','CartController')->except('update');
     });
 });
