@@ -19,7 +19,7 @@ class LoginController extends Controller
             return $credentials;
         }
         if (!Auth::attempt($credentials)) {
-            return response()->json(['status' => false, 'data' => null, 'message' => __('auth.failed')], 401);
+            return response()->json(['status' => false, 'data' => null, 'message' => __('auth.failed')], 400);
         }
         return $this->makeLogin($request, Auth::user());
     }

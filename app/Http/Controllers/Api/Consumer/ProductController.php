@@ -12,6 +12,7 @@ class ProductController extends Controller
     public function index(Request $request,$store_id)
     {
         $products = Product::where('store_id',$store_id)
+                            ->whereHas('store',fn($q) => $q->active())
                             ->active()
                             ->filter($request)
                             ->latest()
@@ -26,7 +27,10 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::active()->with('store')->findOrFail($id);
+        $product = Product::active()
+                            ->whereHas('store',fn($q) => $q->active())
+                            ->with('store')
+                            ->findOrFail($id);
 
         return ProductResource::make($product)
             ->additional([

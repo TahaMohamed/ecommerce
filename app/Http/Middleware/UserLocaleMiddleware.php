@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class ConsumerMiddleware
+class UserLocaleMiddleware
 {
     /**
      * Handle an incoming request.
@@ -16,14 +16,7 @@ class ConsumerMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->check() && auth()->user()->user_type == 'consumer' && auth()->user()->has_rights_to_access) {
-            return $next($request);
-        }else{
-            return response()->json([
-                'status' => false ,
-                'message' => __('auth.failed'),
-                'data' => null
-                ] ,401);
-        }
+        $request->header('Accept-Language') ? app()->setLocale($request->header('Accept-Language')) : app()->setLocale('ar');
+        return $next($request);
     }
 }

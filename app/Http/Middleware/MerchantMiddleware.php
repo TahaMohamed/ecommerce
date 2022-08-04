@@ -21,7 +21,7 @@ class MerchantMiddleware
         }else{
             return response()->json([
                 'status' => false ,
-                'message' => __('auth.login_data_not_true'),
+                'message' => __('auth.failed'),
                 'data' => null
                 ] ,401);
         }
