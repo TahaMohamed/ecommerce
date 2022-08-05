@@ -22,6 +22,7 @@ from the products price.
 1. Rename or copy `.env.example` file to `.env`
 1. `php artisan key:generate`
 1. Set your database credentials in your `.env`
+1. `php artisan migrate`
 1. `php artisan serve`
 1. Use this postman collection for run api services 
     https://documenter.getpostman.com/view/6784299/VUjLLSxJ
