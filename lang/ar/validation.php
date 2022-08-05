@@ -10,6 +10,20 @@
 | as the size rules. Feel free to tweak each of these messages here.
 |
 */
+$languages = [
+    'ar' => 'العربية',
+    'en' => 'الانجليزية',
+];
+
+$attributes = [];
+foreach (config('translatable.locales') as $locale) {
+    $attributes +=[
+        $locale => [
+            'name' => 'الاسم باللغة '. $languages[$locale],
+            'description' => 'الوصف باللغة '. $languages[$locale]
+        ]
+    ];
+}
 
 return [
     'accepted'             => 'يجب قبول :attribute.',
@@ -133,4 +147,24 @@ return [
             'rule-name' => 'custom-message',
         ],
     ],
+
+    'attributes' => [
+        'is_active' => 'حالة التفعيل',
+        'price' => 'السعر',
+        'image' => 'الصورة',
+        'product_id' => 'المنتج',
+        'quantity' => 'الكمية',
+        'username' => 'رقم الهاتف او البريد الالكتروني',
+        'password' => 'كلمة المرور',
+        'device_token' => 'الرقم التعريفي للجهاز',
+        'device_type' => 'نوع نظام التشغيل',
+        'name' => 'الاسم',
+        'email' => 'البريد الالكتروني',
+        'phone' => 'رقم الهاتف',
+        'user_type' => 'نوع المستخدم',
+        'verified_code' => 'كود التحقق',
+        'is_vat_included' => 'تضمين القيمة المضافة لسعر المنتج',
+        'vat_percent' => 'القيمة المضافة',
+        'shipping_cost' => 'سعر الشحن',
+    ]  + $attributes
 ];

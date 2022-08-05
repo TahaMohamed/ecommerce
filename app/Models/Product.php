@@ -8,7 +8,7 @@ use Astrotomic\Translatable\Translatable;
 use App\Traits\Filter;
 use App\Traits\AssetOperation;
 
-class Product extends Model
+class Product extends Model implements TranslatableContract
 {
     use Filter, AssetOperation,Translatable;
 

@@ -3,14 +3,15 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Astrotomic\Translatable\Contracts\Translatable as TranslatableContract;
 use Astrotomic\Translatable\Translatable;
 use App\Traits\Filter;
 use App\Traits\AssetOperation;
 
-class Store extends Model
+class Store extends Model implements TranslatableContract
 {
-    use Filter, AssetOperation,Translatable;
+    use Filter, AssetOperation, HasFactory, Translatable;
 
     protected $guarded = ['id','created_at','updated_at'];
     protected $attributes = ['is_vat_included' => false];

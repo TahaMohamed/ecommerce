@@ -19,7 +19,7 @@ class LoginController extends Controller
             return $credentials;
         }
         if (!Auth::attempt($credentials)) {
-            return response()->json(['status' => false, 'data' => null, 'message' => __('auth.failed')], 400);
+            return response()->json(['status' => false, 'data' => null, 'message' => __('auth.failed')], 401);
         }
         return $this->makeLogin($request, Auth::user());
     }
@@ -53,7 +53,7 @@ class LoginController extends Controller
     {
         $username = is_numeric($request->username) && strlen($request->username) > 6 ? 'phone' : 'email';
         $user = User::firstWhere($username, $request->username);
-        if (! $user?->is_active) {
+        if ($user && !$user?->is_active) {
             $user->update(['verified_code' => 1111]);
             return response()->json([
               'status' => false,

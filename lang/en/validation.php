@@ -1,4 +1,18 @@
 <?php
+$languages = [
+    'ar' => 'Arabic',
+    'en' => 'English',
+];
+
+$attributes = [];
+foreach (config('translatable.locales') as $locale) {
+    $attributes +=[
+        $locale => [
+            'name' => 'name in ' . $languages[$locale],
+            'description' => 'description in ' . $languages[$locale]
+        ]
+    ];
+}
 
 return [
 
@@ -165,6 +179,24 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'is_active' => 'activation',
+        'price' => 'price',
+        'image' => 'image',
+        'product_id' => 'product',
+        'quantity' => 'quantity',
+        'username' => 'phone number or email',
+        'password' => 'password',
+        'device_token' => 'device ID',
+        'device_type' => 'operating system type',
+        'name' => 'name',
+        'email' => 'email',
+        'phone' => 'phone number',
+        'user_type' => 'user type',
+        'verified_code' => 'verification code',
+        'is_vat_included' => 'Value-added product price included',
+        'vat_percent' => 'added value',
+        'shipping_cost' => 'shipping price',
+    ] + $attributes,
 
 ];
